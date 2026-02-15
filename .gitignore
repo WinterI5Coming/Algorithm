@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Input / Output test files
+input.txt
+input*.txt
+output.txt
+output*.txt
+
+# Temp
+*.log
+*.tmp
