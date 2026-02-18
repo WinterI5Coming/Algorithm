@@ -39,4 +39,3 @@
 #     min_idx = len_list.index(min(len_list))
 #     print(f"#{test_case} {start_point[min_idx][1]}")
 
-# -----------------------------------------------------------------------------
