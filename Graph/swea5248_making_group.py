@@ -5,7 +5,6 @@ for test_case in range(1, T + 1):
     apply = list(map(int, input().split()))
 
     parent = [i for i in range(0, N + 1)]
-    group = [[i] for i in range(0, N + 1)]
 
     # def find(x):
     #     if parent[x] != x:
