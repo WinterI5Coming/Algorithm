@@ -18,6 +18,15 @@ Existing platform identifiers remain in filenames when present.
 3. Prefer a platform-and-problem filename such as `boj1234_example.py`.
 4. Do not commit IDE or compiler-generated files.
 
+## CLion
+
+Open the repository root in CLion, then reload the CMake project. Each
+configured C source appears as a separate run target, so select the problem
+name from the top-right run configuration menu and run it independently.
+
+Function-only LeetCode files and unfinished exercises are intentionally not
+configured as executable targets.
+
 ## Commit convention
 
 ```text

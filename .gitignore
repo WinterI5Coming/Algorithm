@@ -12,7 +12,7 @@ env/
 # IDE / Editor
 .vscode/
 .idea/
-C/cmake-build-*/
+cmake-build-*/
 
 # OS
 .DS_Store
