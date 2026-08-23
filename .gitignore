@@ -18,11 +18,15 @@ cmake-build-*/
 .DS_Store
 Thumbs.db
 
-# Input / Output test files
+# Scratch input / output files
 input.txt
 input*.txt
 output.txt
 output*.txt
+
+# ...but curated test cases under tests/ are tracked on purpose
+!tests/**/input*.txt
+!tests/**/output*.txt
 
 # Temp
 *.log
