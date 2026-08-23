@@ -1,0 +1,580 @@
+<title>이 풀이가 시간 안에 들어갈까?</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F7F8F6;
+    --panel: #FFFFFF;
+    --ink: #16211F;
+    --ink-muted: #5C6B68;
+    --accent: #0B6E5F;
+    --accent-soft: #E3EEEA;
+    --warn: #A8442A;
+    --warn-soft: #F5E4DE;
+    --rule: #D8DDD8;
+
+    --serif: "Spectral", Georgia, "Times New Roman", serif;
+    --sans: "Source Sans 3", -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #101514;
+      --panel: #171E1D;
+      --ink: #E4E9E6;
+      --ink-muted: #8FA09C;
+      --accent: #4FBFA8;
+      --accent-soft: #1A2B27;
+      --warn: #E08A6B;
+      --warn-soft: #2E211C;
+      --rule: #26302E;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #101514;
+    --panel: #171E1D;
+    --ink: #E4E9E6;
+    --ink-muted: #8FA09C;
+    --accent: #4FBFA8;
+    --accent-soft: #1A2B27;
+    --warn: #E08A6B;
+    --warn-soft: #2E211C;
+    --rule: #26302E;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.5rem 6rem;
+  }
+
+  .wrap {
+    max-width: 46rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3.25rem;
+  }
+
+  /* ---- masthead ---- */
+
+  header {
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2rem, 6vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .standfirst {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  /* ---- sections ---- */
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.55rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 40rem; }
+
+  strong { font-weight: 600; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+
+  /* ---- numbered method ---- */
+
+  ol.steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    counter-reset: step;
+  }
+
+  ol.steps > li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 0 1rem;
+    align-items: start;
+  }
+
+  ol.steps > li::before {
+    content: counter(step);
+    font-family: var(--mono);
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+    padding-top: 0.15rem;
+    border-top: 2px solid var(--accent);
+    grid-row: span 2;
+  }
+
+  ol.steps .step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* ---- tables ---- */
+
+  .scroll {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: var(--panel);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 0.6rem 0.85rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  thead th {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  td.num, td.big-o {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  td.big-o { color: var(--accent); }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .pill.ok { background: var(--accent-soft); color: var(--accent); }
+  .pill.edge { background: var(--warn-soft); color: var(--warn); }
+
+  /* ---- callout ---- */
+
+  .rule-box {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .rule-box .label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .rule-box.caution { border-left-color: var(--warn); }
+  .rule-box.caution .label { color: var(--warn); }
+
+  /* ---- code block ---- */
+
+  pre {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1rem 1.1rem;
+    margin: 0;
+    overflow-x: auto;
+  }
+
+  pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+  pre .cm { color: var(--ink-muted); }
+  pre .hi { color: var(--accent); }
+
+  /* ---- formula ---- */
+
+  .formula {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    background: var(--accent-soft);
+    color: var(--ink);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* ---- checklist ---- */
+
+  ul.check {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  ul.check li {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    gap: 0.6rem;
+    align-items: baseline;
+  }
+
+  ul.check li::before {
+    content: "□";
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 1.05rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  @media print {
+    :root {
+      --ground: #FFF; --panel: #FFF; --ink: #000;
+      --ink-muted: #444; --rule: #BBB;
+      --accent: #0B6E5F; --accent-soft: #EEE;
+    }
+    body { font-size: 11pt; padding: 0; }
+    section { break-inside: avoid; }
+    header { padding-top: 0; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">알고리즘 학습 레퍼런스 · C</p>
+    <h1>이 풀이가 시간 안에 들어갈까?</h1>
+    <p class="standfirst">복잡도를 세는 방법과, 코드를 쓰기 전에 제약 조건만 보고 판단하는 방법.</p>
+  </header>
+
+  <section>
+    <h2>복잡도가 재는 것</h2>
+    <p>복잡도는 “몇 초 걸리나”가 아니다. <strong>입력이 커질 때 연산 횟수가 어떤 비율로 늘어나는가</strong>다. 컴퓨터 성능이나 언어에 상관없이 알고리즘 자체를 비교하려고 만든 척도다.</p>
+    <p>그래서 상수는 버린다. 연산이 <code>3NM + 100</code>번이면 <code>O(NM)</code>이라고 쓴다. N이 커지면 3배나 +100은 의미가 없어지고 “NM에 비례한다”는 성질만 남는다.</p>
+    <div class="rule-box">
+      <span class="label">핵심</span>
+      <p>복잡도는 <strong>비교</strong>를 위한 도구이자, <strong>코드를 쓰기 전에 이 접근이 통할지 판단</strong>하는 도구다. 두 번째 용도가 실전에서 더 중요하다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>시간복잡도 계산 3단계</h2>
+    <ol class="steps">
+      <li>
+        <div class="step-body">
+          <h3>입력 크기를 변수로 정한다</h3>
+          <p>문제가 주는 값이다. 격자면 <code>N</code>행 <code>M</code>열, 배열이면 길이 <code>N</code>, 그래프면 정점 <code>V</code>와 간선 <code>E</code>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>가장 많이 반복되는 “일 한 덩어리”를 찾는다</h3>
+          <p>보통 가장 안쪽 루프의 몸통이다. 그 안의 작업이 입력 크기와 무관하게 고정된 횟수라면 <strong>상수 시간</strong>으로 묶어서 1로 센다.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-body">
+          <h3>그게 몇 번 실행되는지 입력 크기의 식으로 쓴다</h3>
+          <p>그리고 상수와 낮은 차수를 버린다. <code>2NM + 3N + 7</code> → <code>O(NM)</code>.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>구조별로 세는 법</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>코드 구조</th><th>세는 방법</th><th>결과</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>루프 하나</td>
+            <td>반복 횟수 그대로</td>
+            <td class="big-o">O(N)</td>
+          </tr>
+          <tr>
+            <td>중첩 루프</td>
+            <td><strong>곱한다</strong> — 바깥 N바퀴 × 안쪽 M바퀴</td>
+            <td class="big-o">O(NM)</td>
+          </tr>
+          <tr>
+            <td>루프 두 개가 나란히</td>
+            <td><strong>더한다</strong>. 그리고 큰 쪽만 남긴다</td>
+            <td class="big-o">O(N+M) → O(max)</td>
+          </tr>
+          <tr>
+            <td>매 바퀴 절반으로 줄어듦</td>
+            <td>몇 번 반으로 나누면 1이 되나 = log₂N</td>
+            <td class="big-o">O(log N)</td>
+          </tr>
+          <tr>
+            <td>루프 안에서 이분탐색</td>
+            <td>곱한다 — N × log N</td>
+            <td class="big-o">O(N log N)</td>
+          </tr>
+          <tr>
+            <td>BFS / DFS</td>
+            <td>각 정점이 큐에 <strong>최대 1회</strong> → 정점 수 + 간선 수</td>
+            <td class="big-o">O(V+E)</td>
+          </tr>
+          <tr>
+            <td>재귀</td>
+            <td>호출 횟수 × 호출 1회당 작업</td>
+            <td class="big-o">경우에 따라</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rule-box caution">
+      <span class="label">함정</span>
+      <p>BFS의 <code>O(V+E)</code>는 <strong>넣을 때 방문 표시</strong>를 해야 성립한다. 꺼낼 때 표시하면 같은 정점이 여러 번 큐에 들어가 이 상한이 깨진다. 방문 표시 시점은 정확성 문제만이 아니라 <strong>복잡도를 보장하는 장치</strong>다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>공간복잡도 계산</h2>
+    <p>훨씬 단순하다. <strong>잡아놓은 메모리를 센다.</strong> 배열 크기 × 원소 크기를 더하면 끝이다.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>C 타입</th><th>크기</th><th>10,000개일 때</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>char</code></td><td class="num">1 B</td><td class="num">10 KB</td></tr>
+          <tr><td><code>int</code></td><td class="num">4 B</td><td class="num">40 KB</td></tr>
+          <tr><td><code>long long</code> / 포인터</td><td class="num">8 B</td><td class="num">80 KB</td></tr>
+          <tr><td><code>struct { int r, c; }</code></td><td class="num">8 B</td><td class="num">80 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>재귀를 쓰면 <strong>호출 스택도 공간이다</strong>. 깊이 D까지 들어가면 O(D). DFS로 100×100 격자를 전부 훑으면 최악의 경우 깊이가 10,000이 되어 스택 오버플로 위험이 있다 — 같은 문제를 BFS로 풀면 스택을 안 쓰는 이유다.</p>
+    <div class="rule-box">
+      <span class="label">기준</span>
+      <p>백준 메모리 제한은 보통 <strong>256 MB</strong>. 코테 수준 배열은 대개 수백 KB라 시간복잡도가 병목이고 공간은 거의 문제되지 않는다. 단, <code>int arr[10000][10000]</code>은 400 MB로 즉시 초과다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>워크스루: 백준 2178 미로 탐색</h2>
+    <p>N×M 격자에서 BFS로 최단 거리를 구하는 풀이에 3단계를 적용한다.</p>
+    <pre><code><span class="cm">// 1단계: 입력 크기 = N행 M열</span>
+while (!is_empty()) {              <span class="hi">// 3단계: 몇 바퀴?</span>
+    Point cur = pop();
+    for (int dir = 0; dir &lt; 4; dir++) {   <span class="cm">// 항상 4바퀴 (상수)</span>
+        <span class="cm">// 2단계: 범위 체크·벽 체크·dist 설정·push</span>
+        <span class="cm">//        모두 상수 시간 → 한 덩어리로 1</span>
+    }
+}</code></pre>
+    <p><code>for</code>는 4바퀴로 고정이고 안쪽은 상수 시간이다. 그러니 핵심 질문은 <code>while</code>이 몇 바퀴 도는가 하나로 좁혀진다. 넣을 때 방문 표시를 하므로 각 칸은 큐에 최대 한 번만 들어간다.</p>
+    <div class="formula">while 바퀴 수   ≤  N × M          (칸 수)
+바퀴당 작업     =  4               (상수)
+─────────────────────────────────
+총 연산        ≈  4 × N × M   →   <strong>O(N × M)</strong></div>
+    <p>공간은 <code>maze</code> 40 KB + <code>dist</code> 40 KB + <code>queue</code> 80 KB = <strong>160 KB</strong>, 역시 <code>O(N × M)</code>. N=M=100 최악의 경우 연산은 <strong>40,000번</strong> — 1억의 0.04%로 압도적 여유.</p>
+  </section>
+
+  <section>
+    <h2>풀기 전에 감각 잡기</h2>
+    <p>문제가 <code>N ≤ 100</code> 같은 제약을 주는 이유는 <strong>어느 복잡도까지 허용되는지 알려주는 것</strong>이다. 제약을 먼저 읽고 목표 복잡도를 정한 다음 접근을 고르면, 통하지 않을 풀이에 시간을 쓰지 않는다.</p>
+    <div class="rule-box">
+      <span class="label">기준선</span>
+      <p><strong>1초에 약 1억(10<sup>8</sup>) 연산.</strong> C는 실제로 이보다 빠르지만 안전하게 잡는 값이다. 시간 제한이 2초면 2억까지.</p>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>제약</th><th>허용 복잡도</th><th>연산 수</th><th>대표 접근</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">N ≤ 10</td>
+            <td class="big-o">O(N!)</td>
+            <td class="num">3.6 × 10⁶</td>
+            <td>순열 완전탐색, 백트래킹</td>
+            <td><span class="pill ok">여유</span></td>
+          </tr>
+          <tr>
+            <td class="num">N ≤ 20</td>
+            <td class="big-o">O(2<sup>N</sup>)</td>
+            <td class="num">1.0 × 10⁶</td>
+            <td>부분집합 완전탐색, 비트마스크</td>
+            <td><span class="pill ok">여유</span></td>
+          </tr>
+          <tr>
+            <td class="num">N ≤ 500</td>
+            <td class="big-o">O(N³)</td>
+            <td class="num">1.25 × 10⁸</td>
+            <td>플로이드–워셜, 3중 루프 DP</td>
+            <td><span class="pill edge">경계</span></td>
+          </tr>
+          <tr>
+            <td class="num">N ≤ 5,000</td>
+            <td class="big-o">O(N²)</td>
+            <td class="num">2.5 × 10⁷</td>
+            <td>2중 루프 DP, 인접 행렬</td>
+            <td><span class="pill ok">여유</span></td>
+          </tr>
+          <tr>
+            <td class="num">N ≤ 200,000</td>
+            <td class="big-o">O(N log N)</td>
+            <td class="num">3.5 × 10⁶</td>
+            <td>정렬, 이분탐색, 우선순위 큐</td>
+            <td><span class="pill ok">여유</span></td>
+          </tr>
+          <tr>
+            <td class="num">N ≤ 10,000,000</td>
+            <td class="big-o">O(N)</td>
+            <td class="num">1.0 × 10⁷</td>
+            <td>한 번 훑기, 투 포인터, 누적합</td>
+            <td><span class="pill ok">여유</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rule-box caution">
+      <span class="label">신호</span>
+      <p><code>N ≤ 100,000</code>인 문제에서 O(N²) 풀이를 떠올렸다면 100억 연산 — <strong>코드를 쓰기 전에 이미 시간 초과</strong>다. 구현하지 말고 다른 접근을 찾으라는 신호로 읽어야 한다.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>자주 쓰는 연산의 복잡도</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>연산</th><th>복잡도</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>배열 인덱싱 <code>a[i]</code></td><td class="big-o">O(1)</td><td>C 배열의 최대 장점</td></tr>
+          <tr><td>배열 전체 훑기</td><td class="big-o">O(N)</td><td></td></tr>
+          <tr><td><code>qsort</code></td><td class="big-o">O(N log N)</td><td>비교 함수 호출 오버헤드 있음</td></tr>
+          <tr><td>이분 탐색</td><td class="big-o">O(log N)</td><td>정렬된 배열에만</td></tr>
+          <tr><td>격자 BFS / DFS</td><td class="big-o">O(NM)</td><td>각 칸 1회 방문</td></tr>
+          <tr><td>그래프 BFS / DFS</td><td class="big-o">O(V+E)</td><td>인접 리스트 기준</td></tr>
+          <tr><td>다익스트라 (힙)</td><td class="big-o">O(E log V)</td><td></td></tr>
+          <tr><td>힙 삽입 / 삭제</td><td class="big-o">O(log N)</td><td>C에서는 직접 구현</td></tr>
+          <tr><td>해시맵 조회</td><td class="big-o">O(1) 평균</td><td>최악 O(N), C에서는 직접 구현</td></tr>
+          <tr><td><code>strlen</code></td><td class="big-o">O(N)</td><td><strong>루프 조건에 두면 O(N²)</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>문제 풀기 전 체크리스트</h2>
+    <ul class="check">
+      <li>제약 조건(N의 상한)을 <strong>먼저</strong> 읽었다</li>
+      <li>위 사다리표에서 목표 복잡도를 정했다</li>
+      <li>떠올린 접근의 복잡도가 그 목표 안에 든다</li>
+      <li>최악의 경우 연산 수를 실제로 계산해봤다</li>
+      <li>배열 크기를 제약의 상한으로 잡았다 (넉넉하게 +1)</li>
+      <li>재귀를 쓸 경우 최대 깊이를 확인했다</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>algo-study 워크스페이스 · <code>reference/complexity-budget.html</code> · 기준선 10<sup>8</sup> ops/sec는 안전하게 잡은 값이며 실제 C 성능은 이보다 높다.</p>
+  </footer>
+
+</div>

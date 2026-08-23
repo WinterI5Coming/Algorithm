@@ -27,6 +27,8 @@ add_solution(boj2609_gcd_lcm solutions/c/math/boj2609_gcd_lcm.c)
 
 # Miscellaneous and search
 add_solution(atcoder_cookies solutions/c/misc/atcoder_cookies.c)
+add_solution(boj2178_maze_search solutions/c/search/boj2178_maze_search.c)
+add_solution(boj2667_apartment_complexes solutions/c/search/boj2667_apartment_complexes.c)
 add_solution(swea5653_cell solutions/c/search/swea5653_cell.c)
 
 # String
@@ -35,6 +37,7 @@ add_solution(boj1152_cnt_of_word solutions/c/string/boj1152_cnt_of_word.c)
 add_solution(boj2675_repeat_str solutions/c/string/boj2675_repeat_str.c)
 
 # C language practice
+add_solution(queue_two_designs practice/c/structs/queue_two_designs.c)
 add_solution(struct_point practice/c/structs/struct_point.c)
 
 # Files intentionally omitted:
