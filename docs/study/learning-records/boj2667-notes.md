@@ -6,6 +6,9 @@
 
 ## 테스트 결과
 
+소스: `solutions/c/search/boj2667_apartment_complexes.c` (CMake 타겟 `boj2667_apartment_complexes`)
+입력: `tests/boj2667_apartment_complexes/` · 문제 설명: `docs/study/problems/boj2667-statement.md`
+
 | 파일 | 내용 | 기대 | 결과 |
 |---|---|---|---|
 | `input-example.txt` | 7×7 예제 | 3 / 7,8,9 | ✅ |

@@ -2,7 +2,7 @@
 
 ## 내 레퍼런스 문서 (직접 작성)
 
-- **[이 풀이가 시간 안에 들어갈까?](https://claude.ai/code/artifact/dd14b7fd-8c22-42d7-ac0f-be4a792baf4c)** — 복잡도 계산 3단계, 구조별 세는 법, 제약→허용 복잡도 사다리표, 풀기 전 체크리스트. 로컬 원본: `reference/complexity-budget.html`
+- **[이 풀이가 시간 안에 들어갈까?](https://claude.ai/code/artifact/dd14b7fd-8c22-42d7-ac0f-be4a792baf4c)** — 복잡도 계산 3단계, 구조별 세는 법, 제약→허용 복잡도 사다리표, 풀기 전 체크리스트. 로컬 원본: `docs/study/reference/complexity-budget.html`
 
 ## 문제 출처
 

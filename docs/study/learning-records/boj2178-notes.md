@@ -7,13 +7,16 @@
 
 ## 테스트 케이스
 
+소스: `solutions/c/search/boj2178_maze_search.c` (CMake 타겟 `boj2178_maze_search`)
+입력: `tests/boj2178_maze_search/`
+
 | 파일 | 입력 | 기대 | 결과 |
 |---|---|---|---|
 | `input-4x6.txt` | 4×6 예제 | 15 | ✅ |
 | `input-1x1.txt` | 1×1, 시작=도착 | 1 | ✅ |
 
-`input.txt`는 작업용 스크래치 (VS Code F5가 `freopen`으로 읽는 파일).
-실행: `./solution.exe < input-4x6.txt`
+실행: `gcc -std=c11 -Wall solutions/c/search/boj2178_maze_search.c -o /tmp/a && /tmp/a < tests/boj2178_maze_search/input-4x6.txt`
+(또는 CLion에서 `boj2178_maze_search` 타겟 실행)
 
 ## 개념 확인 (완료)
 
