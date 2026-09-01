@@ -38,6 +38,7 @@ add_solution(boj2675_repeat_str solutions/c/string/boj2675_repeat_str.c)
 
 # C language practice
 add_solution(queue_two_designs practice/c/structs/queue_two_designs.c)
+add_solution(stack_iterative_dfs practice/c/structs/stack_iterative_dfs.c)
 add_solution(struct_point practice/c/structs/struct_point.c)
 
 # Files intentionally omitted:
