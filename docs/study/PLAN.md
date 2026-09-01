@@ -20,6 +20,8 @@
 ### 1단계 · 격자 탐색 C 재구현 (1주) — 진행 중
 - ✅ 큐 (전역 배열 방식) — `boj2178_maze_search.c`
 - ✅ 연결 요소 / 다중 호출 BFS — `boj2667_apartment_complexes.c`
+- ✅ **2178 복습 1회차 (9/1)** — 빈 파일 재작성 정답. 구조는 굳었고 실패가 세부 정확도로 이동 ([[0005-review-failure-shifts-to-detail]]). 다음 복습 9/4
+- **`reference/` 체크리스트 작성** — 원래 "스택·힙 이후"로 미뤘으나 근거가 바뀌어 앞으로 당김. 반복 실수 목록에서 항목을 뽑는다
 - **스택 (구조체+포인터 방식)** → 반복 DFS. 큐(전역)와 대조 학습 ([[0003-globals-vs-struct-encapsulation]]). 비교 코드: `practice/c/structs/queue_two_designs.c`
 - 재구현 대상: `boj7576_tomato`(다중 시작점) → `boj2206_breaking_wall_and_move`(**상태 차원 추가 — visited가 3차원이 되는 이유**) → `boj13913`(경로 복원)
 - **목표: 격자 BFS/DFS를 C로 30분 안에 자동 작성**
@@ -55,7 +57,8 @@ Python에는 있으나 C에는 전무한 영역.
 ## 매 세션 공통
 
 - **문제 전 복잡도 계산** — `docs/study/reference/complexity-budget.html` 체크리스트
-- **복습: +3 / +7 / +21일** — 반드시 **빈 파일에서 재구현**. 예전 코드를 보는 건 재인(再認)이지 기억이 아니다
+- **복습: +3 / +7 / +21일** — 반드시 **빈 파일에서 재구현**. 예전 코드를 보는 건 재인(再認)이지 기억이 아니다. 복습 파일은 `practice/c/review/`(gitignore), 결과만 학습 기록에 남긴다
+- **복습 판정은 결함의 성격으로** — 구조적 결함 = +3일 리셋 / 세부 결함만 = 정상 진행 / 무결함 = 다음 간격 ([[0005-review-failure-shifts-to-detail]])
 - **패턴 3개 이상이면 세션 내 인터리빙** — 미션의 "30초 분류" 목표
 - **`docs/study/reference/` 축적** — 최종 산출물. 스택·힙 구현 후 **"C 코테 자료구조 관용구"** 치트시트 (큐/스택/힙 골격, 선언 순서, scanf 포맷, 연쇄 비교 등 함정)
 - **저장소 규칙 준수** — `solutions/c/<topic>/`, `CMakeLists.txt` 등록, `tests/<target>/`, 커밋 컨벤션. `README.md` 참조
@@ -64,5 +67,5 @@ Python에는 있으나 C에는 전무한 영역.
 
 - **Python 재구현 방식의 효과를 1단계에서 검증한다.** 정답을 아는 상태가 오히려 사고를 건너뛰게 만든다면, 신규 문제와 섞는다
 - 목표 시점(기업 코테 일정)이 정해지면 2단계를 앞으로 당긴다
-- 개발 환경은 **CLion + CMake**가 주력. `algo-study`에서 만든 VS Code 설정(`launch.json`, `tasks.json`)은 이 저장소에 옮기지 않았다
+- 개발 환경은 **VS Code로 전환됨(9/1)**. `.vscode/c_cpp_properties.json`으로 IntelliSense 설정(gitignore 대상). CMake 타겟은 유지하되 CLion 전용 가정은 버린다
 - 미션이 바뀌면 계획을 다시 짜고 학습 기록을 남긴다

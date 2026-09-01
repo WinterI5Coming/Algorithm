@@ -24,5 +24,8 @@
 인자 필수인 경우가 더 많고, 인자를 받는 코드는 고정 시작점에도 그대로 쓸 수 있지만 반대는 불가능하다. **손에 익는 형태가 더 일반적인 쪽이어야 하므로 인자형을 기본으로 가르친다.** "이 문제에서 가장 단순한 형태"보다 "앞으로 계속 쓸 형태"를 기준으로 스켈레톤을 제시할 것.
 
 ## Working notes
+- 2026-09-01: **개발 환경이 CLion → VS Code로 바뀜.** 사용자가 VS Code로 작업 중이며 "Reload CMake Project가 없다"고 지적. `.vscode/c_cpp_properties.json`을 생성해 IntelliSense를 붙였다(컴파일러 `C:/msys64/ucrt64/bin/gcc.exe`, C11). `.vscode/`는 gitignore 대상이라 커밋되지 않음. [[0004-existing-assets-change-the-plan]]에 "CLion + CMake가 주력"으로 적힌 부분은 이제 유효하지 않다.
+- 2026-09-01: **툴체인 함정** — 이 환경의 Git Bash PATH에 `C:\msys64\ucrt64\bin`이 없어서 `gcc`가 진단 메시지 없이 exit 1로 죽었다(`gcc --version`은 동작). `cc1.exe`가 DLL을 못 찾은 것. 컴파일 전 `export PATH="/c/msys64/ucrt64/bin:$PATH"` 필요.
+- 2026-09-01: 복습 파일은 `practice/c/review/`에 두고 gitignore 처리. 매번 빈 파일에서 재작성하는 용도이므로 커밋하지 않고 결과만 학습 기록에 남긴다.
 - 2026-08-22: 워크스페이스 초기화. 첫 진단 세션부터 시작.
 - C 전환 병목 예상 지점: 큐/해시맵 직접 구현, 문자열 처리, 2차원 배열 동적 할당, 재귀 깊이
