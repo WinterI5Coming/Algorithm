@@ -41,6 +41,9 @@ add_solution(queue_two_designs practice/c/structs/queue_two_designs.c)
 add_solution(stack_iterative_dfs practice/c/structs/stack_iterative_dfs.c)
 add_solution(struct_point practice/c/structs/struct_point.c)
 
+# Review re-implementations (spaced repetition — written from a blank file)
+add_solution(boj2178_review practice/c/review/boj2178_review.c)
+
 # Files intentionally omitted:
 # - LeetCode functions without main()
 # - unfinished problem solutions
